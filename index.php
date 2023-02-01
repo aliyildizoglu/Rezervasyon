@@ -1,3 +1,15 @@
+
+<?php include 'admin/islem.php' ?>
+<?php
+
+$anasayfa = $conn->prepare("SELECT * FROM  anasayfa WHERE anasayfa_id=1");
+$anasayfa->execute();
+$anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
+
+
+
+
+?>
 <!doctype html>
 <html lang="tr">
 <head>
@@ -120,7 +132,7 @@
         <div class="section started" id="section-started">
 
             <!-- background -->
-            <div class="video-bg jarallax" style="background-image: url(images/started_image_p.jpg);">
+            <div class="video-bg jarallax" style="background-image: url(images/back.jpeg);">
                 <div class="video-bg-mask"></div>
                 <div class="video-bg-texture" id="grained_container"></div>
             </div>
@@ -130,13 +142,14 @@
                 <div class="vertical-center">
                     <div class="started-content">
                         <h1 class="h-title">
-                            Merhaba, Ben <strong>Kutluhan Azaflı</strong>, Mersinde <br/>
-                            Siber Güvenlik ve Yazılım Uzmanıyım.
+                            <strong><?php echo $anasayfa_cek['anasayfa_isim'] ?></strong>,<br/>
+                            <?php echo  $anasayfa_cek['anasayfa_mesaj'] ?>
+
                         </h1>
                         <div class="h-subtitle typing-subtitle">
-                            <p>I code cool <strong>websites</strong></p>
-                            <p>I develop <strong>mobile apps</strong></p>
-                            <p>I love <strong>wordpress</strong></p>
+                            <p><strong><?php echo $anasayfa_cek['anasayfa_aciklama1'] ?></strong></p>
+                            <p><?php echo $anasayfa_cek['anasayfa_aciklama2'] ?> </p>
+                            <p><strong><?php echo $anasayfa_cek['anasayfa_aciklama3'] ?></strong></p>
                         </div>
                         <span class="typed-subtitle"></span>
                     </div>

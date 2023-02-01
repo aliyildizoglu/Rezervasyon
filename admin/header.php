@@ -1,3 +1,5 @@
+<?php include 'conn.php' ?>
+
 <!DOCTYPE html>
 <!--
 Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template
