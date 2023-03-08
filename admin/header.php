@@ -91,7 +91,12 @@ License: For each use you must have a valid license purchased only from above li
                 </li> <li class="nav-item">
                     <a href="beceri.php" class="nav-link">
                         <i class="link-icon" data-feather="code"></i>
-                        <span class="link-title">Yaptığım İşler</span>
+                        <span class="link-title">Becerilerim</span>
+                    </a>
+                </li></li> <li class="nav-item">
+                    <a href="dil.php" class="nav-link">
+                        <i class="link-icon" data-feather="home"></i>
+                        <span class="link-title">Bildiğim Diller</span>
                     </a>
                 </li>
 

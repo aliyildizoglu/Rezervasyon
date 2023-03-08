@@ -242,38 +242,21 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                 <!-- skills items -->
                 <div class="skills percent content-box">
                     <ul>
+                        <?php
+                        $beceri = $conn->prepare("SELECT * FROM beceri WHERE  beceri_durumu= '0'");
+                        $beceri->execute(['beceri_durumu' => '0']);
+                        while ($beceri_cek = $beceri->fetch(PDO::FETCH_ASSOC)){
+                        ?>
                         <li>
-                            <div class="name">Web Design</div>
+                            <div class="name"><?php echo $beceri_cek['beceri_baslik'] ?></div>
                             <div class="progress ">
-                                <div class="percentage" style="width: 100%;">
-                                    <span class="percent">100%</span>
+                                <div class="percentage" style="width: <?php echo $beceri_cek['beceri_bilgi'] ?>%;">
+                                    <span class="percent"><?php echo $beceri_cek['beceri_bilgi'] ?>%</span>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="name">Illustrations</div>
-                            <div class="progress ">
-                                <div class="percentage" style="width: 70%;">
-                                    <span class="percent">70%</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="name">Photoshop</div>
-                            <div class="progress ">
-                                <div class="percentage" style="width: 95%;">
-                                    <span class="percent">95%</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="name">Graphic Design</div>
-                            <div class="progress ">
-                                <div class="percentage" style="width: 85%;">
-                                    <span class="percent">85%</span>
-                                </div>
-                            </div>
-                        </li>
+
+                        <?php } ?>
                     </ul>
                 </div>
 
@@ -292,38 +275,22 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                 <!-- skills items -->
                 <div class="skills dotted content-box">
                     <ul>
+                        <?php
+                        $dil = $conn->prepare("SELECT * FROM dil WHERE  dil_durumu= '0'");
+                        $dil->execute(['dil_durumu' => '0']);
+                        while ($dil_cek = $dil->fetch(PDO::FETCH_ASSOC)){
+                        ?>
+
+
                         <li>
-                            <div class="name">English</div>
+                            <div class="name"><?php echo $dil_cek['dil_ismi'] ?></div>
                             <div class="progress">
-                                <div class="percentage" style="width: 90%;">
-                                    <span class="percent">90%</span>
+                                <div class="percentage" style="width: <?php echo $dil_cek['dil_yuzdesi'] ?>%;">
+                                    <span class="percent"><?php echo $dil_cek['dil_yuzdesi'] ?>%</span>
                                 </div>
                             </div>
                         </li>
-                        <li>
-                            <div class="name">German</div>
-                            <div class="progress">
-                                <div class="percentage" style="width: 70%;">
-                                    <span class="percent">70%</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="name">Italian</div>
-                            <div class="progress">
-                                <div class="percentage" style="width: 55%;">
-                                    <span class="percent">55%</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="name">French</div>
-                            <div class="progress">
-                                <div class="percentage" style="width: 85%;">
-                                    <span class="percent">85%</span>
-                                </div>
-                            </div>
-                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
 

@@ -260,4 +260,161 @@ if (isset($_GET['isler_sil'])){
 
 }
 
+
+
+if (isset($_POST['beceri_ekle_gonder'])) {
+
+
+
+    $beceri_baslik = $_POST['beceri_baslik'];
+    $beceri_bilgi = $_POST['beceri_bilgi'];
+    $beceri_durumu = $_POST['beceri_durumu'];
+
+    $duzenle = $conn->prepare("INSERT INTO beceri SET
+    
+     
+        beceri_baslik=:beceri_baslik,
+        beceri_bilgi=:beceri_bilgi,
+        beceri_durumu=:beceri_durumu
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'beceri_baslik' => $beceri_baslik,
+        'beceri_bilgi' => $beceri_bilgi,
+        'beceri_durumu' => $beceri_durumu
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:beceri.php?yuklenme=basarili");
+    } else {
+        header("Location:beceri.php?yuklenme=basarisiz");
+    }
+
+}
+
+
+if (isset($_GET['beceri_sil'])){
+
+    $beceri_sil = $conn->prepare("DELETE FROM beceri  WHERE beceri_id=:beceri_id");
+
+    $beceri_sil->execute(['beceri_id'=> $_GET['id']]);
+
+
+    if (beceri_sil) {
+        header("Location:beceri.php?durum=basarili");
+
+    } else {
+        header("Location:beceri.php?durum=basarisiz");
+    }
+
+
+}
+
+
+
+if (isset($_POST['dil_duzenle_gonder'])) {
+
+
+    $dil_id = $_POST['dil_id'];
+    $dil_ismi = $_POST['dil_ismi'];
+    $dil_yuzdesi = $_POST['dil_yuzdesi'];
+    $dil_durumu = $_POST['dil_durumu'];
+
+    $duzenle = $conn->prepare("UPDATE dil SET
+    
+      
+        dil_ismi=:dil_ismi,
+        dil_yuzdesi=:dil_yuzdesi,
+        dil_durumu=:dil_durumu
+
+        WHERE dil_id = '$dil_id'
+                 
+                 ");
+
+    $update = $duzenle->execute([
+
+
+        'dil_ismi' => $dil_ismi,
+        'dil_yuzdesi' => $dil_yuzdesi,
+        'dil_durumu' => $dil_durumu
+    ]);
+
+
+    if ($update) {
+
+
+        header("Location:dil-duzenle.php?id=$dil_id?yuklenme=basarili");
+    } else {
+        header("Location:dil-duzenle.php?id='$dil_id'?yuklenme=basarisiz");
+    }
+
+}
+
+
+if (isset($_POST['dil_ekle_gonder'])) {
+
+
+
+    $dil_ismi = $_POST['dil_ismi'];
+    $dil_yuzdesi = $_POST['dil_yuzdesi'];
+    $dil_durumu = $_POST['dil_durumu'];
+
+    $duzenle = $conn->prepare("INSERT INTO dil SET
+    
+     
+        dil_ismi=:dil_ismi,
+        dil_yuzdesi=:dil_yuzdesi,
+        dil_durumu=:dil_durumu
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'dil_ismi' => $dil_ismi,
+        'dil_yuzdesi' => $dil_yuzdesi,
+        'dil_durumu' => $dil_durumu
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:dil.php?yuklenme=basarili");
+    } else {
+        header("Location:dil.php?yuklenme=basarisiz");
+    }
+
+}
+
+
+if (isset($_GET['dil_sil'])){
+
+    $dil_sil = $conn->prepare("DELETE FROM dil  WHERE dil_id=:dil_id");
+
+    $dil_sil->execute(['dil_id'=> $_GET['id']]);
+
+
+    if (dil_sil) {
+        header("Location:dil.php?durum=basarili");
+
+    } else {
+        header("Location:dil.php?durum=basarisiz");
+    }
+
+
+}
+
+
+
+
+
 ?>

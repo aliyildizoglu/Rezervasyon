@@ -8,14 +8,14 @@
             <div class="card">
 
                 <div class="card-body">
-                    <a href="beceri-ekle.php"><button style="float: right" type="submit" class="btn btn-primary">Ekle</button> </a>
-                    <h6 class="card-title">Beceriler</h6>
+                    <a href="dil-ekle.php"><button style="float: right" type="submit" class="btn btn-primary">Ekle</button> </a>
+                    <h6 class="card-title">Sahip Olunan Diller</h6>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Beceri İsmi </th>
+                                <th>Dil İsmi </th>
                                 <th>Yayınlanma Durumu</th>
                                 <th>Düzenle</th>
                                 <th>Sil</th>
@@ -26,21 +26,21 @@
                             <tr>
                                 <?php
 
-                                $beceri = $conn->prepare("SELECT * FROM beceri order by beceri_id DESC ");
+                                $beceri = $conn->prepare("SELECT * FROM dil order by dil_id DESC ");
                                 $beceri->execute();
 
                                 $say = 0;
 
-                                while ($beceri_cek = $beceri->fetch(PDO::FETCH_ASSOC)) {
+                                while ($dil_cek = $beceri->fetch(PDO::FETCH_ASSOC)) {
                                 $say++;
 
                                 ?>
                                 <th><?php echo $say ?></th>
-                                <td><?php echo $beceri_cek['beceri_baslik'] ?></td>
-                                <td><?php if( $beceri_cek['beceri_durumu'] == 0){ ?>
-                                        Aktif <?php } if($beceri_cek['beceri_durumu'] == 1){  ?> Pasif <?php } ?></td>
-                                <td><a href="beceri-duzenle.php?id=<?php echo $beceri_cek['beceri_id'] ?>"><button type="submit" class="btn btn-warning">Düzenle</button> </a> </td>
-                                <td><a href="islem.php?beceri_sil&id=<?php echo $beceri_cek['beceri_id'] ?>"><button type="submit" class="btn btn-danger">Sil</button> </a> </td>
+                                <td><?php echo $dil_cek['dil_ismi'] ?></td>
+                                <td><?php if( $dil_cek['dil_durumu'] == 0){ ?>
+                                        Aktif <?php } if($dil_cek['dil_durumu'] == 1){  ?> Pasif <?php } ?></td>
+                                <td><a href="dil-duzenle.php?id=<?php echo $dil_cek['dil_id'] ?>"><button type="submit" class="btn btn-warning">Düzenle</button> </a> </td>
+                                <td><a href="islem.php?dil_sil&id=<?php echo $dil_cek['dil_id'] ?>"><button type="submit" class="btn btn-danger">Sil</button> </a> </td>
 
 
                             </tr>
