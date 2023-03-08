@@ -1,4 +1,3 @@
-
 <?php include 'admin/islem.php' ?>
 <?php
 
@@ -6,7 +5,9 @@ $anasayfa = $conn->prepare("SELECT * FROM  anasayfa WHERE anasayfa_id=1");
 $anasayfa->execute();
 $anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
 
-
+$hakkimda = $conn->prepare("SELECT * FROM hakkimizda WHERE hakkimizda_id =1");
+$hakkimda->execute();
+$hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -130,9 +131,9 @@ $anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
 
         <!-- Section Started -->
         <div class="section started" id="section-started">
-
             <!-- background -->
-            <div class="video-bg jarallax" style="background-image: url(images/back.jpeg);">
+            <div class="video-bg jarallax"
+                 style="background-image: url(admin/resimler/anasayfa_resimler/<?php echo $anasayfa_cek['anasayfa_resim'] ?>);">
                 <div class="video-bg-mask"></div>
                 <div class="video-bg-texture" id="grained_container"></div>
             </div>
@@ -143,7 +144,7 @@ $anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
                     <div class="started-content">
                         <h1 class="h-title">
                             <strong><?php echo $anasayfa_cek['anasayfa_isim'] ?></strong>,<br/>
-                            <?php echo  $anasayfa_cek['anasayfa_mesaj'] ?>
+                            <?php echo $anasayfa_cek['anasayfa_mesaj'] ?>
 
                         </h1>
                         <div class="h-subtitle typing-subtitle">
@@ -173,22 +174,19 @@ $anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
 
                 <!-- image -->
                 <div class="image">
-                    <img src="images/man2.jpg" alt=""/>
+                    <img src="admin/resimler/hakkimizda_resimler/<?php echo $hakkimda_cek['hakkimizda_resim'] ?>"
+                         alt=""/>
                 </div>
 
                 <!-- desc -->
                 <div class="desc">
-                    <p>Hello! I’m Daniel Curry. Web designer from USA, California, San Francisco. I have rich experience
-                        in web site design and building, also I am good at wordpress. I love to talk with you about our
-                        unique.</p>
+                    <p><?php echo $hakkimda_cek['hakkimizda_tanitim'] ?></p>
                     <div class="info-list">
                         <ul>
-                            <li><strong>Age:</strong> 24</li>
-                            <li><strong>Residence:</strong> USA</li>
-                            <li><strong>Freelance:</strong> Available</li>
-                            <li><strong>Address:</strong> San Francisco</li>
-                            <li><strong>Phone:</strong> +1 256 254 84 56</li>
-                            <li><strong>E-mail:</strong> alejandroa@gmail.com</li>
+                            <li><strong>Yaş:</strong> <?php echo $hakkimda_cek['hakkimizda_yas'] ?></li>
+                            <li><strong>Adres:</strong> <?php echo $hakkimda_cek['hakkimizda_adres'] ?></li>
+                            <li><strong>Telefon:</strong> <?php echo $hakkimda_cek['hakkimizda_telefon'] ?></li>
+                            <li><strong>E-mail:</strong> <?php echo $hakkimda_cek['hakkimizda_mail'] ?></li>
                         </ul>
                     </div>
                 </div>
@@ -203,69 +201,29 @@ $anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
 
                 <!-- title -->
                 <div class="title">
-                    <div class="title_inner">Yaptığım İşler</div>
+                    <div class="title_inner">Sahip Olunan Özellikler</div>
                 </div>
 
                 <!-- service items -->
+
+
+
+
                 <div class="service-items">
-
+                    <?php
+                    $isler = $conn->prepare("SELECT * FROM isler WHERE  isler_durum= '0'");
+                    $isler->execute(['isler_durum' => '0']);
+                    while ($isler_cek = $isler->fetch(PDO::FETCH_ASSOC)){
+                    ?>
                     <div class="service-col">
                         <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-code"></span></div>
-                            <div class="name">Web Development</div>
-                            <div class="text">Modern and mobile-ready website that will help you reach all of your
-                                marketing.
+                            <div class="icon"><span class="<?php echo $isler_cek['isler_ikon'] ?>"></span></div>
+                            <div class="name"><?php echo $isler_cek['isler_baslik'] ?></div>
+                            <div class="text"><?php echo $isler_cek['isler_aciklama'] ?>
                             </div>
                         </div>
                     </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-music"></span></div>
-                            <div class="name">Music Writing</div>
-                            <div class="text">Music copying, writing, creating, transcription, arranging and services.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-ad"></span></div>
-                            <div class="name">Advetising</div>
-                            <div class="text">Advertising services include television, radio, print, mail, and web
-                                apps.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-gamepad"></span></div>
-                            <div class="name">Game Development</div>
-                            <div class="text">Developing memorable and unique mobile android, ios and video games.</div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-camera"></span></div>
-                            <div class="name">Photography</div>
-                            <div class="text">Our in-house photography services team made up of professional
-                                photographers.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-mobile-alt"></span></div>
-                            <div class="name">Android Application</div>
-                            <div class="text">Games, playing music, handle network transactions, interacting content
-                                etc.
-                            </div>
-                        </div>
-                    </div>
-
+                    <?php  } ?>
                 </div>
 
                 <div class="clear"></div>
@@ -278,7 +236,7 @@ $anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
 
                 <!-- title -->
                 <div class="title">
-                    <div class="title_inner">Design Skills</div>
+                    <div class="title_inner">Becerilerim</div>
                 </div>
 
                 <!-- skills items -->
@@ -287,8 +245,8 @@ $anasayfa_cek = $anasayfa->fetch(PDO::FETCH_ASSOC);
                         <li>
                             <div class="name">Web Design</div>
                             <div class="progress ">
-                                <div class="percentage" style="width: 90%;">
-                                    <span class="percent">90%</span>
+                                <div class="percentage" style="width: 100%;">
+                                    <span class="percent">100%</span>
                                 </div>
                             </div>
                         </li>

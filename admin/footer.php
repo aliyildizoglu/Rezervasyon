@@ -18,6 +18,8 @@
 <script src="assets/vendors/jquery.flot/jquery.flot.resize.js"></script>
 <script src="assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script src="assets/vendors/apexcharts/apexcharts.min.js"></script>
+<script src="assets/vendors/datatables.net/jquery.dataTables.js"></script>
+<script src="assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
 <!-- End plugin js for this page -->
 
 <!-- inject:js -->
@@ -28,6 +30,7 @@
 <!-- Custom js for this page -->
 <script src="assets/js/dashboard-light.js"></script>
 <script src="assets/js/datepicker.js"></script>
+<script src="assets/js/data-table.js"></script>
 <!-- End custom js for this page -->
 
 </body>
