@@ -303,36 +303,21 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 
                 <!-- title -->
                 <div class="title">
-                    <div class="title_inner">Knowledge</div>
+                    <div class="title_inner">Bilgiler</div>
                 </div>
 
                 <!-- skills -->
                 <div class="skills list content-box">
                     <ul>
+                        <?php
+                        $bilgi = $conn->prepare("SELECT * FROM bilgi WHERE  bilgi_durum= '0'");
+                        $bilgi->execute(['dil_durum' => '0']);
+                        while ($bilgi_cek = $bilgi->fetch(PDO::FETCH_ASSOC)){
+                        ?>
                         <li>
-                            <div class="name">Website hosting</div>
+                            <div class="name"><?php echo $bilgi_cek['bilgi_aciklama'] ?></div>
                         </li>
-                        <li>
-                            <div class="name">iOS and android apps</div>
-                        </li>
-                        <li>
-                            <div class="name">Create logo design</div>
-                        </li>
-                        <li>
-                            <div class="name">Design for print</div>
-                        </li>
-                        <li>
-                            <div class="name">Modern and mobile-ready</div>
-                        </li>
-                        <li>
-                            <div class="name">Advertising services include</div>
-                        </li>
-                        <li>
-                            <div class="name">Graphics and animations</div>
-                        </li>
-                        <li>
-                            <div class="name">Search engine marketing</div>
-                        </li>
+                        <?php } ?>
                     </ul>
                 </div>
 

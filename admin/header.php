@@ -93,10 +93,17 @@ License: For each use you must have a valid license purchased only from above li
                         <i class="link-icon" data-feather="code"></i>
                         <span class="link-title">Becerilerim</span>
                     </a>
-                </li></li> <li class="nav-item">
+                </li>
+                </li> <li class="nav-item">
                     <a href="dil.php" class="nav-link">
                         <i class="link-icon" data-feather="home"></i>
                         <span class="link-title">Bildiğim Diller</span>
+                    </a>
+                </li>
+                </li> <li class="nav-item">
+                    <a href="bilgi.php" class="nav-link">
+                        <i class="link-icon" data-feather="home"></i>
+                        <span class="link-title">Bilgiler</span>
                     </a>
                 </li>
 

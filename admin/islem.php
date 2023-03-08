@@ -413,6 +413,95 @@ if (isset($_GET['dil_sil'])){
 
 }
 
+if (isset($_GET['bilgi_sil'])){
+
+    $bilgi_sil = $conn->prepare("DELETE FROM bilgi  WHERE bilgi_id=:bilgi_id");
+
+    $bilgi_sil->execute(['bilgi_id'=> $_GET['id']]);
+
+
+    if (bilgi_sil) {
+        header("Location:bilgi.php?durum=basarili");
+
+    } else {
+        header("Location:bilgi.php?durum=basarisiz");
+    }
+
+
+}
+
+if (isset($_POST['bilgi_ekle_gonder'])) {
+
+
+
+    $bilgi_aciklama = $_POST['bilgi_aciklama'];
+    $bilgi_durum = $_POST['bilgi_durum'];
+
+
+    $duzenle = $conn->prepare("INSERT INTO bilgi SET
+    
+     
+        bilgi_aciklama=:bilgi_aciklama,
+        bilgi_durum=:bilgi_durum
+       
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'bilgi_aciklama' => $bilgi_aciklama,
+        'bilgi_durum' => $bilgi_durum
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:bilgi.php?yuklenme=basarili");
+    } else {
+        header("Location:bilgi.php?yuklenme=basarisiz");
+    }
+
+}
+
+if (isset($_POST['bilgi_duzenle_gonder'])) {
+
+
+    $bilgi_id = $_POST['bilgi_id'];
+    $bilgi_aciklama = $_POST['bilgi_aciklama'];
+    $bilgi_durum = $_POST['bilgi_durum'];
+
+
+    $duzenle = $conn->prepare("UPDATE bilgi SET
+    
+      
+        bilgi_aciklama=:bilgi_aciklama,
+        bilgi_durum=:bilgi_durum
+       
+
+        WHERE bilgi_id ='$bilgi_id'
+                 
+                 ");
+
+    $update = $duzenle->execute([
+
+
+        'bilgi_aciklama' => $bilgi_aciklama,
+        'bilgi_durum' => $bilgi_durum
+    ]);
+
+
+    if ($update) {
+
+
+        header("Location:bilgi-duzenle.php?id=$bilgi_id?yuklenme=basarili");
+    } else {
+        header("Location:bilgi-duzenle.php?id='$bilgi_id'?yuklenme=basarisiz");
+    }
+
+}
 
 
 
