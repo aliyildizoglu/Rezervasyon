@@ -334,43 +334,22 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                 </div>
 
                 <!-- interests items -->
+
+                <?php
+                $hobi = $conn->prepare("SELECT * FROM hobi WHERE  hobi_durum= '0'");
+                $hobi->execute(['hobi_durum' => '0']);
+                while ($hobi_cek = $hobi->fetch(PDO::FETCH_ASSOC)){
+                ?>
                 <div class="service-items">
-
                     <div class="service-col">
                         <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-baseball-ball"></span></div>
-                            <div class="name">Basketball</div>
-                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                            <div class="icon"><span class="<?php echo $hobi_cek['hobi_ikon'] ?>"></span></div>
+                            <div class="name"><?php echo $hobi_cek['hobi_baslik'] ?></div>
+                            <div class="text"><?php echo $hobi_cek['hobi_aciklama'] ?></div>
                         </div>
                     </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-campground"></span></div>
-                            <div class="name">Camping</div>
-                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-chess-knight"></span></div>
-                            <div class="name">Chess</div>
-                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-headphones"></span></div>
-                            <div class="name">Music</div>
-                            <div class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                        </div>
-                    </div>
-
+                    <?php } ?>
                 </div>
-
-                <div class="clear"></div>
             </div>
         </div>
 

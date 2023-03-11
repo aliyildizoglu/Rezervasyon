@@ -496,12 +496,111 @@ if (isset($_POST['bilgi_duzenle_gonder'])) {
     if ($update) {
 
 
+
         header("Location:bilgi-duzenle.php?id=$bilgi_id?yuklenme=basarili");
     } else {
         header("Location:bilgi-duzenle.php?id='$bilgi_id'?yuklenme=basarisiz");
     }
 
 }
+
+
+if (isset($_POST['hobi_duzenle_gonder'])) {
+
+
+    $hobi_id = $_POST['hobi_id'];
+    $hobi_ikon = $_POST['hobi_ikon'];
+    $hobi_baslik = $_POST['hobi_baslik'];
+    $hobi_aciklama = $_POST['hobi_aciklama'];
+    $hobi_durum = $_POST['hobi_durum'];
+
+    $duzenle = $conn->prepare("UPDATE hobi SET
+    
+        hobi_ikon=:hobi_ikon,
+        hobi_baslik=:hobi_baslik,
+        hobi_aciklama=:hobi_aciklama,
+        hobi_durum=:hobi_durum
+
+        WHERE hobi_id = '$hobi_id'
+                 
+                 ");
+
+    $update = $duzenle->execute([
+
+        'hobi_ikon' => $hobi_ikon,
+        'hobi_baslik' => $hobi_baslik,
+        'hobi_aciklama' => $hobi_aciklama,
+        'hobi_durum' => $hobi_durum
+    ]);
+
+
+    if ($update) {
+
+
+        header("Location:hobi-duzenle.php?id=$hobi_id?yuklenme=basarili");
+    } else {
+        header("Location:hobi-duzenle.php?id='$hobi_id'&yuklenme=basarisiz");
+    }
+
+}
+
+
+
+if (isset($_POST['hobi_ekle_gonder'])) {
+
+
+    $hobi_ikon = $_POST['hobi_ikon'];
+    $hobi_baslik = $_POST['hobi_baslik'];
+    $hobi_aciklama = $_POST['hobi_aciklama'];
+    $hobi_durum = $_POST['hobi_durum'];
+
+    $duzenle = $conn->prepare("INSERT INTO hobi SET
+    
+        hobi_ikon=:hobi_ikon,
+        hobi_baslik=:hobi_baslik,
+        hobi_aciklama=:hobi_aciklama,
+        hobi_durum=:hobi_durum
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'hobi_ikon' => $hobi_ikon,
+        'hobi_baslik' => $hobi_baslik,
+        'hobi_aciklama' => $hobi_aciklama,
+        'hobi_durum' => $hobi_durum
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:hobi.php?yuklenme=basarili");
+    } else {
+        header("Location:hobi.php?yuklenme=basarisiz");
+    }
+
+}
+if (isset($_GET['hobi_sil'])){
+
+    $hobi_sil = $conn->prepare("DELETE FROM hobi  WHERE hobi_id=:hobi_id");
+
+    $hobi_sil->execute(['hobi_id'=> $_GET['id']]);
+
+
+    if (hobi_sil) {
+        header("Location:hobi.php?durum=basarili");
+
+    } else {
+        header("Location:hobi.php?durum=basarisiz");
+    }
+
+
+}
+
+
 
 
 
