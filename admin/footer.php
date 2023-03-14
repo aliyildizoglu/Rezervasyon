@@ -32,6 +32,8 @@
 <script src="assets/js/datepicker.js"></script>
 <script src="assets/js/data-table.js"></script>
 <!-- End custom js for this page -->
+<script src="ckeditor/ckeditor.js"></script>
+
 
 </body>
 </html>
