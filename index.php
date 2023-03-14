@@ -366,6 +366,11 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                 <div class="reviews-carousel">
                     <div class="swiper-container">
                         <div class="swiper-wrapper">
+                            <?php
+                            $insanlar = $conn->prepare("SELECT * FROM insanlar WHERE  insanlar_durum= '0'");
+                            $insanlar->execute(['insanlar_durum' => '0']);
+                            while ($insanlar_cek = $insanlar->fetch(PDO::FETCH_ASSOC)){
+                            ?>
 
                             <div class="swiper-slide">
                                 <div class="reviews-item content-box">
@@ -373,29 +378,15 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                                         <img src="images/rev1.jpg" alt="">
                                     </div>
                                     <div class="info">
-                                        <div class="name">Aleyna</div>
-                                        <div class="company">Okul Öncesi Öğretmenliği</div>
+                                        <div class="name"><?php echo $insanlar_cek['insanlar_isim'] ?></div>
+                                        <div class="company"><?php echo $insanlar_cek['insanlar_is'] ?></div>
                                     </div>
                                     <div class="text">
-                                        Benzersiz bir gece yaşattığı için teşekkür ederim. İyi ki varsın.
+                                        <?php echo $insanlar_cek['insanlar_yorum'] ?>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="swiper-slide">
-                                <div class="reviews-item content-box">
-                                    <div class="image">
-                                        <img src="images/rev1.jpg" alt="">
-                                    </div>
-                                    <div class="info">
-                                        <div class="name">Ali</div>
-                                        <div class="company">Bilgisayar Mühendisliği</div>
-                                    </div>
-                                    <div class="text">
-                                        Çok iyi bir dost ve arkadaş. Tanıştığım için çok mutluyum.
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
 
                         </div>
                     </div>

@@ -106,10 +106,17 @@ License: For each use you must have a valid license purchased only from above li
                         <span class="link-title">Bilgiler</span>
                     </a>
                 </li>
-                </li> <li class="nav-item">
+                </li>
+                <li class="nav-item">
                     <a href="hobi.php" class="nav-link">
                         <i class="link-icon" data-feather="home"></i>
                         <span class="link-title">Hobiler</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="insanlar.php" class="nav-link">
+                        <i class="link-icon" data-feather="home"></i>
+                        <span class="link-title">Hakkımda Söyledikleri</span>
                     </a>
                 </li>
 

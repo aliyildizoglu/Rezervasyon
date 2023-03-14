@@ -583,6 +583,8 @@ if (isset($_POST['hobi_ekle_gonder'])) {
     }
 
 }
+
+
 if (isset($_GET['hobi_sil'])){
 
     $hobi_sil = $conn->prepare("DELETE FROM hobi  WHERE hobi_id=:hobi_id");
@@ -597,6 +599,63 @@ if (isset($_GET['hobi_sil'])){
         header("Location:hobi.php?durum=basarisiz");
     }
 
+
+}
+
+
+if (isset($_GET['insanlar_sil'])){
+
+    $insanlar_sil = $conn->prepare("DELETE FROM insanlar  WHERE insanlar_id=:insanlar_id");
+
+    $insanlar_sil->execute(['insanlar_id'=> $_GET['id']]);
+
+
+    if (insanlar_sil) {
+        header("Location:insanlar.php?durum=basarili");
+
+    } else {
+        header("Location:insanlar.php?durum=basarisiz");
+    }
+
+
+}
+
+
+if (isset($_POST['insanlar_ekle_gonder'])) {
+
+
+    $insanlar_isim = $_POST['insanlar_isim'];
+    $insanlar_is = $_POST['insanlar_is'];
+    $insanlar_yorum = $_POST['insanlar_yorum'];
+    $insanlar_durum = $_POST['insanlar_durum'];
+
+    $duzenle = $conn->prepare("INSERT INTO insanlar SET
+    
+        insanlar_isim=:insanlar_isim,
+        insanlar_is=:insanlar_is,
+        insanlar_yorum=:insanlar_yorum,
+        insanlar_durum=:insanlar_durum
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'insanlar_isim' => $insanlar_isim,
+        'insanlar_is' => $insanlar_is,
+        'insanlar_yorum' => $insanlar_yorum,
+        'insanlar_durum' => $insanlar_durum
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:insanlar.php?yuklenme=basarili");
+    } else {
+        header("Location:insanlar.php?yuklenme=basarisiz");
+    }
 
 }
 
