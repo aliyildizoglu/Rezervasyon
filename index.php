@@ -402,34 +402,36 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
 
+
+
+        <?php
+        $yazi_alani = $conn->prepare("SELECT * FROM yazi_alani WHERE  yazi_alani_durum= '0'");
+        $yazi_alani->execute(['yazi_alani_durum' => '0']);
+        while ($yazi_alani_cek = $yazi_alani->fetch(PDO::FETCH_ASSOC)){
+        ?>
         <!-- Section Custom Text -->
         <div class="section custom-text" id="section-custom-text">
             <div class="content">
 
                 <!-- title -->
                 <div class="title">
-                    <div class="title_inner">Custom Text</div>
+                    <div class="title_inner"><?php echo $yazi_alani_cek['yazi_alani_baslik'] ?></div>
                 </div>
 
                 <!-- clients items -->
                 <div class="content-box">
                     <div class="single-post-text">
                         <p>
-                            Now there is more fashion. There is no so-called trends. Now chase after anything not
-                            necessary — nor for fashionable color nor the shape, nor for style. Think about the content
-                            that you want to invest in a created object, and only then will form. The thing is your
-                            spirit. A spirit unlike forms hard copy.
+                           <?php echo $yazi_alani_cek['yazi_alani_aciklama'] ?>
                         </p>
-                        <p>
-                            Here choose yourself like that, without any looking back, do your personal, home, small
-                            fashion, and all will be well.
-                        </p>
+
                     </div>
                 </div>
 
                 <div class="clear"></div>
             </div>
         </div>
+        <?php } ?>
 
         <!-- Works -->
         <div class="section works" id="section-portfolio">

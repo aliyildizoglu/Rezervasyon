@@ -119,6 +119,12 @@ License: For each use you must have a valid license purchased only from above li
                         <span class="link-title">Hakkımda Söyledikleri</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="yazi-alani.php" class="nav-link">
+                        <i class="link-icon" data-feather="home"></i>
+                        <span class="link-title">Serbest Yazı Alanı</span>
+                    </a>
+                </li>
 
 
 

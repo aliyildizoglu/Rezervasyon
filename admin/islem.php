@@ -660,6 +660,46 @@ if (isset($_POST['insanlar_ekle_gonder'])) {
 }
 
 
+if (isset($_POST['yazi_alani_gonder'])) {
+
+
+
+    $yazi_alani_baslik = $_POST['yazi_alani_baslik'];
+    $yazi_alani_aciklama = $_POST['yazi_alani_aciklama'];
+    $yazi_alani_durum = $_POST['yazi_alani_durum'];
+
+
+    $duzenle = $conn->prepare("UPDATE yazi_alani SET
+    
+ 
+        yazi_alani_baslik=:yazi_alani_baslik,
+        yazi_alani_aciklama=:yazi_alani_aciklama,
+        yazi_alani_durum=:yazi_alani_durum
+
+        WHERE yazi_alani_id = 1
+                 
+                 ");
+
+    $update = $duzenle->execute([
+
+
+        'yazi_alani_baslik' => $yazi_alani_baslik,
+        'yazi_alani_aciklama' => $yazi_alani_aciklama,
+        'yazi_alani_durum' => $yazi_alani_durum
+    ]);
+
+
+    if ($update) {
+
+
+        header("Location:yazi-alani.php?yuklenme=basarili");
+    } else {
+        header("Location:yazi-alani.php?yuklenme=basarisiz");
+    }
+
+}
+
+
 
 
 
