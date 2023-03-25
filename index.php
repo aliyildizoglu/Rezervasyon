@@ -447,27 +447,25 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                     <div class="filters">
                         <div class="btn-group">
                             <label data-text="All" class="glitch-effect"><input type="radio" name="fl_radio"
-                                                                                value=".box-item"/>All</label>
+                                                                                value=".box-item"/>Hepsi</label>
                         </div>
                         <div class="btn-group">
                             <label data-text="Video"><input type="radio" name="fl_radio" value=".f-video"/>Video</label>
                         </div>
                         <div class="btn-group">
-                            <label data-text="Music"><input type="radio" name="fl_radio" value=".f-music"/>Music</label>
+                            <label data-text="Music"><input type="radio" name="fl_radio" value=".f-music"/>Müzik</label>
                         </div>
                         <div class="btn-group">
-                            <label data-text="Links"><input type="radio" name="fl_radio" value=".f-links"/>Links</label>
+                            <label data-text="Links"><input type="radio" name="fl_radio" value=".f-links"/>Link</label>
                         </div>
-                        <div class="btn-group">
-                            <label data-text="Image"><input type="radio" name="fl_radio" value=".f-image"/>Image</label>
-                        </div>
+
                         <div class="btn-group">
                             <label data-text="Gallery"><input type="radio" name="fl_radio"
-                                                              value=".f-gallery"/>Gallery</label>
+                                                              value=".f-gallery"/>Galeri</label>
                         </div>
                         <div class="btn-group">
                             <label data-text="Content"><input type="radio" name="fl_radio"
-                                                              value=".f-content"/>Content</label>
+                                                              value=".f-content"/>Yazılarım</label>
                         </div>
                     </div>
                 </div>
@@ -478,7 +476,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                     <div class="box-item f-gallery">
                         <div class="image">
                             <a href="#gallery-1" class="has-popup-gallery hover-animated">
-                                <img src="images/work1.jpg" class="wp-post-image" alt=""/>
+                                <img src="admin/resimler/hakkimizda_resimler/10195b8e6d967152d827603dd434.webp" class="wp-post-image" alt=""/>
                                 <span class="info circle">
 										<span class="centrize full-width">
 											<span class="vertical-center">
@@ -493,25 +491,26 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                             </a>
                             <div id="gallery-1" class="mfp-hide">
                                 <a href="images/work1.jpg"></a>
-                                <a href="images/work2.jpg"></a>
-                                <a href="images/work3.jpg"></a>
-                                <a href="images/work4.jpg"></a>
                             </div>
                         </div>
                     </div>
-
+                    <?php
+                    $link = $conn->prepare("SELECT * FROM link WHERE  link_durum= '0'");
+                    $link->execute(['link_durum' => '0']);
+                    while ($link_cek = $link->fetch(PDO::FETCH_ASSOC)){
+                    ?>
                     <div class="box-item f-links">
                         <!-- add class "animate-to-page" if need animated transition to page and delete target="_blank" -->
                         <div class="image">
-                            <a href="https://google.com/" class="has-popup-link hover-animated" target="_blank">
-                                <img src="images/work3.jpg" class="wp-post-image" alt=""/>
+                            <a href="<?php echo $link_cek['link_link'] ?>" class="has-popup-link hover-animated" target="_blank">
+                                <img src="admin/resimler/link_resimler/<?php echo $link_cek['link_kapak_resim'] ?>" class="wp-post-image" alt=""/>
                                 <span class="info circle">
 										<span class="centrize full-width">
 											<span class="vertical-center">
 												<span class="icon fas fa-link"></span>
 												<span class="desc">
 													<span class="category">Links</span>
-													<span class="name">Nike Red</span>
+													<span class="name"><?php echo $link_cek['link_kapak_baslik'] ?></span>
 												</span>
 											</span>
 										</span>
@@ -519,18 +518,24 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                             </a>
                         </div>
                     </div>
+                    <?php } ?>
+                    <?php
+                    $video = $conn->prepare("SELECT * FROM video WHERE  video_durum= '0'");
+                    $video->execute(['video_durum' => '0']);
+                    while ($video_cek = $video->fetch(PDO::FETCH_ASSOC)){
+                    ?>
 
                     <div class="box-item f-video">
                         <div class="image">
-                            <a href="https://youtu.be/S4L8T2kFFck" class="has-popup-video hover-animated">
-                                <img src="images/work2.jpg" class="wp-post-image" alt=""/>
+                            <a href="<?php echo $video_cek['video_link'] ?>" class="has-popup-video hover-animated">
+                                <img src="admin/resimler/video_resimler/<?php echo $video_cek['video_kapak_resim'] ?>" class="wp-post-image" alt=""/>
                                 <span class="info circle">
 										<span class="centrize full-width">
 											<span class="vertical-center">
 												<span class="icon fas fa-video"></span>
 												<span class="desc">
 													<span class="category">Video</span>
-													<span class="name">Fertility of Some Plants</span>
+													<span class="name"><?php echo $video_cek['video_kapak_baslik'] ?></span>
 												</span>
 											</span>
 										</span>
@@ -539,56 +544,27 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                         </div>
                     </div>
 
-                    <div class="box-item f-image">
-                        <div class="image">
-                            <a href="images/work4.jpg" class="has-popup-image hover-animated">
-                                <img src="images/work4.jpg" class="wp-post-image" alt=""/>
-                                <span class="info circle">
-										<span class="centrize full-width">
-											<span class="vertical-center">
-												<span class="icon fas fa-image"></span>
-												<span class="desc">
-													<span class="category">Image</span>
-													<span class="name">Inspiration in Cap Haitian</span>
-												</span>
-											</span>
-										</span>
-									</span>
-                            </a>
-                        </div>
-                    </div>
+                    <?php } ?>
 
-                    <div class="box-item f-image">
-                        <div class="image">
-                            <a href="images/work7.jpg" class="has-popup-image hover-animated">
-                                <img src="images/work7.jpg" class="wp-post-image" alt=""/>
-                                <span class="info circle">
-										<span class="centrize full-width">
-											<span class="vertical-center">
-												<span class="icon fas fa-image"></span>
-												<span class="desc">
-													<span class="category">Image</span>
-													<span class="name">Water and Shore</span>
-												</span>
-											</span>
-										</span>
-									</span>
-                            </a>
-                        </div>
-                    </div>
 
+
+                    <?php
+                    $muzik = $conn->prepare("SELECT * FROM muzik WHERE  muzik_durum= '0'");
+                    $muzik->execute(['muzik_durum' => '0']);
+                    while ($muzik_cek = $muzik->fetch(PDO::FETCH_ASSOC)){
+                    ?>
                     <div class="box-item f-music">
                         <div class="image">
-                            <a href="https://w.soundcloud.com/player/?visual=true&#038;url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F221650664&#038;show_artwork=true"
+                            <a href="<?php echo $muzik_cek['muzik_link'] ?>"
                                class="has-popup-music hover-animated">
-                                <img src="images/work6.jpg" class="wp-post-image" alt=""/>
+                                <img src="admin/resimler/muzik_resimler/<?php echo $muzik_cek['muzik_kapak_resim'] ?>" class="wp-post-image" alt=""/>
                                 <span class="info circle">
 										<span class="centrize full-width">
 											<span class="vertical-center">
 												<span class="icon fas fa-music"></span>
 												<span class="desc">
 													<span class="category">Music</span>
-													<span class="name">Dark Bike</span>
+													<span class="name"><?php echo $muzik_cek['muzik_kapak_baslik'] ?></span>
 												</span>
 											</span>
 										</span>
@@ -596,31 +572,8 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                             </a>
                         </div>
                     </div>
+                    <?php } ?>
 
-                    <div class="box-item f-gallery">
-                        <div class="image">
-                            <a href="#gallery-2" class="has-popup-gallery hover-animated">
-                                <img src="images/work5.jpg" class="wp-post-image" alt=""/>
-                                <span class="info circle">
-										<span class="centrize full-width">
-											<span class="vertical-center">
-												<span class="icon fas fa-images"></span>
-												<span class="desc">
-													<span class="category">Gallery</span>
-													<span class="name">Undulating Space</span>
-												</span>
-											</span>
-										</span>
-									</span>
-                            </a>
-                            <div id="gallery-2" class="mfp-hide">
-                                <a href="images/work5.jpg"></a>
-                                <a href="images/work1.jpg"></a>
-                                <a href="images/work2.jpg"></a>
-                                <a href="images/work3.jpg"></a>
-                            </div>
-                        </div>
-                    </div>
 
                     <div class="box-item f-content">
                         <div class="image">

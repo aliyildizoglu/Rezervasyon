@@ -700,6 +700,215 @@ if (isset($_POST['yazi_alani_gonder'])) {
 }
 
 
+if (isset($_POST['video_ekle_gonder'])) {
+
+
+    $video_kapak_baslik = $_POST['video_kapak_baslik'];
+    $video_link = $_POST['video_link'];
+    $video_durum = $_POST['video_durum'];
+    $uploads_dir1 = 'resimler/video_resimler';
+    @$tmp_name = $_FILES['video_kapak_resim']["tmp_name"];
+    @$name = $_FILES['video_kapak_resim']["name"];
+    $sayi1 = rand(1, 9999);
+    $resimyolu1 = $sayi1 . $name;
+    @move_uploaded_file($tmp_name, "$uploads_dir1/$sayi1$name");
+
+    $duzenle = $conn->prepare("INSERT INTO video SET
+    
+        video_kapak_baslik=:video_kapak_baslik,
+        video_link=:video_link,
+        video_durum=:video_durum,
+        video_kapak_resim=:video_kapak_resim
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'video_kapak_baslik' => $video_kapak_baslik,
+        'video_link' => $video_link,
+        'video_durum' => $video_durum,
+        'video_kapak_resim' => $resimyolu1
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:video.php?yuklenme=basarili");
+    } else {
+        header("Location:video.php?yuklenme=basarisiz");
+    }
+
+}
+
+
+if (isset($_GET['video_sil'])){
+
+    $videoo = $_GET['id'];
+    $video = $conn->prepare("SELECT * FROM video WHERE video_id='$videoo'");
+    $video->execute();
+    $video_cek = $video->fetch(PDO::FETCH_ASSOC);
+    $resimsil1 = $video_cek['video_kapak_resim'];
+
+
+    $video_sil = $conn->prepare("DELETE FROM video  WHERE video_id=:video_id");
+
+    $video_sil->execute(['video_id'=> $_GET['id']]);
+
+
+    if (video_sil) {
+        unlink("resimler/video_resimler/$resimsil1");
+        header("Location:video.php?durum=basarili");
+
+    } else {
+        header("Location:video.php?durum=basarisiz");
+    }
+
+
+}
+
+
+if (isset($_GET['muzik_sil'])){
+
+    $muzikk = $_GET['id'];
+    $muzik = $conn->prepare("SELECT * FROM muzik WHERE muzik_id='$muzikk'");
+    $muzik->execute();
+    $muzik_cek = $muzik->fetch(PDO::FETCH_ASSOC);
+    $resimsil1 = $muzik_cek['muzik_kapak_resim'];
+
+
+    $muzik_sil = $conn->prepare("DELETE FROM muzik  WHERE muzik_id=:muzik_id");
+
+    $muzik_sil->execute(['muzik_id'=> $_GET['id']]);
+
+
+    if (muzik_sil) {
+        unlink("resimler/muzik_resimler/$resimsil1");
+        header("Location:muzik.php?durum=basarili");
+
+    } else {
+        header("Location:muzik.php?durum=basarisiz");
+    }
+
+
+}
+
+
+
+
+
+if (isset($_POST['muzik_ekle_gonder'])) {
+
+
+    $muzik_kapak_baslik = $_POST['muzik_kapak_baslik'];
+    $muzik_link = $_POST['muzik_link'];
+    $muzik_durum = $_POST['muzik_durum'];
+    $uploads_dir1 = 'resimler/muzik_resimler';
+    @$tmp_name = $_FILES['muzik_kapak_resim']["tmp_name"];
+    @$name = $_FILES['muzik_kapak_resim']["name"];
+    $sayi1 = rand(1, 9999);
+    $resimyolu1 = $sayi1 . $name;
+    @move_uploaded_file($tmp_name, "$uploads_dir1/$sayi1$name");
+
+    $duzenle = $conn->prepare("INSERT INTO muzik SET
+    
+        muzik_kapak_baslik=:muzik_kapak_baslik,
+        muzik_link=:muzik_link,
+        muzik_durum=:muzik_durum,
+        muzik_kapak_resim=:muzik_kapak_resim
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'muzik_kapak_baslik' => $muzik_kapak_baslik,
+        'muzik_link' => $muzik_link,
+        'muzik_durum' => $muzik_durum,
+        'muzik_kapak_resim' => $resimyolu1
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:muzik.php?yuklenme=basarili");
+    } else {
+        header("Location:muzik.php?yuklenme=basarisiz");
+    }
+
+}
+
+
+if (isset($_POST['link_ekle_gonder'])) {
+
+
+    $link_kapak_baslik = $_POST['link_kapak_baslik'];
+    $link_link = $_POST['link_link'];
+    $link_durum = $_POST['link_durum'];
+    $uploads_dir1 = 'resimler/link_resimler';
+    @$tmp_name = $_FILES['link_kapak_resim']["tmp_name"];
+    @$name = $_FILES['link_kapak_resim']["name"];
+    $sayi1 = rand(1, 9999);
+    $resimyolu1 = $sayi1 . $name;
+    @move_uploaded_file($tmp_name, "$uploads_dir1/$sayi1$name");
+
+    $duzenle = $conn->prepare("INSERT INTO link SET
+    
+        link_kapak_baslik=:link_kapak_baslik,
+        link_link=:link_link,
+        link_durum=:link_durum,
+        link_kapak_resim=:link_kapak_resim
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'link_kapak_baslik' => $link_kapak_baslik,
+        'link_link' => $link_link,
+        'link_durum' => $link_durum,
+        'link_kapak_resim' => $resimyolu1
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:link.php?yuklenme=basarili");
+    } else {
+        header("Location:link.php?yuklenme=basarisiz");
+    }
+}
+
+if (isset($_GET['link_sil'])){
+
+    $linkk = $_GET['id'];
+    $link = $conn->prepare("SELECT * FROM link WHERE link_id='$linkk'");
+    $link->execute();
+    $link_cek = $link->fetch(PDO::FETCH_ASSOC);
+    $resimsil1 = $link_cek['link_kapak_resim'];
+
+
+    $link_sil = $conn->prepare("DELETE FROM link  WHERE link_id=:link_id");
+
+    $link_sil->execute(['link_id'=> $_GET['id']]);
+
+
+    if (link_sil) {
+        unlink("resimler/link_resimler/$resimsil1");
+        header("Location:link.php?durum=basarili");
+
+    } else {
+        header("Location:link.php?durum=basarisiz");
+    }
+
+
+}
 
 
 

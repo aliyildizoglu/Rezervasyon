@@ -138,7 +138,20 @@ License: For each use you must have a valid license purchased only from above li
                     <div class="collapse" id="charts">
                         <ul class="nav sub-menu">
                             <li class="nav-item">
-                                <a href="demo1/pages/charts/apex.html" class="nav-link">Apex</a>
+                                <a href="video.php" class="nav-link">Video</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="muzik.php" class="nav-link">Müzik</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="link.php" class="nav-link">Link</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Galeri</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="" class="nav-link">Yazılarım</a>
                             </li>
 
                         </ul>
