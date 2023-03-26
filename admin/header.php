@@ -45,6 +45,9 @@ License: For each use you must have a valid license purchased only from above li
     <!-- End layout styles -->
 
     <link rel="shortcut icon" href="assets/images/favicon.png" />
+
+
+
 </head>
 <body>
 <div class="main-wrapper">
@@ -148,10 +151,10 @@ License: For each use you must have a valid license purchased only from above li
                             </li>
 
                             <li class="nav-item">
-                                <a href="" class="nav-link">Galeri</a>
+                                <a href="galeri" class="nav-link">Galeri</a>
                             </li>
                             <li class="nav-item">
-                                <a href="" class="nav-link">Yazılarım</a>
+                                <a href="yazilarim.php" class="nav-link">Yazılarım</a>
                             </li>
 
                         </ul>

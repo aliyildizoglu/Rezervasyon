@@ -1,13 +1,4 @@
 <?php include  'header.php' ?>
-<?php
-$yazi_alani = $conn->prepare("SELECT * FROM  yazi_alani WHERE yazi_alani_id= '1' ");
-$yazi_alani->execute();
-$yazi_alani_cek = $yazi_alani->fetch(PDO::FETCH_ASSOC);
-
-
-
-
-?>
 
     <div class="page-content">
 
@@ -19,7 +10,7 @@ $yazi_alani_cek = $yazi_alani->fetch(PDO::FETCH_ASSOC);
                         <form class="forms-sample" method="POST" action="islem.php">
                             <div class="mb-3">
                                 <label for="exampleInputUsername1" class="form-label">Yazı Başlığı</label>
-                                <input type="text" class="form-control" id="exampleInputUsername1" name="yazi_alani_baslik" autocomplete="off" value="<?php echo $yazi_alani_cek['yazi_alani_baslik'] ?>" required>
+                                <input type="text" class="form-control" id="exampleInputUsername1" name="yazi_alani_baslik" autocomplete="off"  required>
                             </div>
                             <textarea name="yazi_alani_aciklama" id="metin" class="ckeditor"></textarea>
 

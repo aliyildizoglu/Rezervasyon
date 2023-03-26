@@ -563,7 +563,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 											<span class="vertical-center">
 												<span class="icon fas fa-music"></span>
 												<span class="desc">
-													<span class="category">Music</span>
+													<span class="category">Müzik</span>
 													<span class="name"><?php echo $muzik_cek['muzik_kapak_baslik'] ?></span>
 												</span>
 											</span>
@@ -575,17 +575,24 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                     <?php } ?>
 
 
+                    <?php
+                    $yazilarim = $conn->prepare("SELECT * FROM yazilarim WHERE  yazilarim_durum = '0'");
+                    $yazilarim->execute(['yazilarim_durum' => '0']);
+
+                    while ($yazilarim_cek = $yazilarim->fetch(PDO::FETCH_ASSOC)){
+
+                    ?>
                     <div class="box-item f-content">
                         <div class="image">
                             <a href="#popup-1" class="has-popup-media hover-animated">
-                                <img src="images/work8.jpg" class="wp-post-image" alt=""/>
+                                <img src="admin/resimler/yazilarim_resimler/<?php echo $yazilarim_cek['yazilarim_resim'] ?>" class="wp-post-image" alt="sjdfjaskdfjk"/>
                                 <span class="info circle">
 										<span class="centrize full-width">
 											<span class="vertical-center">
 												<span class="icon fas fa-plus"></span>
 												<span class="desc">
-													<span class="category">Content</span>
-													<span class="name">Curved Ceiling Ribs</span>
+													<span class="category">Yazılarım</span>
+													<span class="name"><?php echo $yazilarim_cek['yazilarim_kapak_baslik'] ?></span>
 												</span>
 											</span>
 										</span>
@@ -594,40 +601,14 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                         </div>
                         <div id="popup-1" class="popup-box mfp-fade mfp-hide">
                             <div class="content">
-                                <div class="image" style="background-image: url(images/work8.jpg);"></div>
+                                <div class="image" style="background-image: url(admin/resimler/yazilarim_resimler/<?php echo $yazilarim_cek['yazilarim_resim'] ?>);"></div>
                                 <div class="desc single-post-text">
-                                    <div class="category">Content</div>
-                                    <h4>Hand holding pyramid painting</h4>
-                                    <p>
-                                        Now there is more fashion. There is no so-called trends. Now chase after
-                                        anything not necessary — nor for fashionable color nor the shape, nor for style.
-                                        Think about the content that you want to invest in a created object, and only
-                                        then will form. The thing is your spirit. A spirit unlike forms hard copy.
-                                    </p>
-                                    <ul>
-                                        <li>Now there is more fashion. There is no so-called trends.</li>
-                                        <li>Now chase after anything not necessary — nor for fashionable color nor the
-                                            shape, nor for style.
-                                        </li>
-                                        <li>Think about the content that you want to invest in a created object, and
-                                            only then will form.
-                                        </li>
-                                        <li>The thing is your spirit. A spirit unlike forms hard copy.</li>
-                                    </ul>
-                                    <p>
-                                        Now there is more fashion. There is no so-called trends. Now chase after
-                                        anything not necessary — nor for fashionable color nor the shape, nor for style.
-                                        Think about the content that you want to invest in a created object, and only
-                                        then will form. The thing is your spirit. A spirit unlike forms hard copy.
-                                    </p>
-                                    <a href="works_single_1.html" class="btn hover-animated">
-                                        <span class="circle"></span>
-                                        <span class="lnk">View Project</span>
-                                    </a>
+                                    <?php echo $yazilarim_cek['yazilarim_yazi'] ?>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
 
                 </div>
 

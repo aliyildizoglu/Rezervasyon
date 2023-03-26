@@ -911,6 +911,143 @@ if (isset($_GET['link_sil'])){
 }
 
 
+if (isset($_POST['galeri_ekle_gonder'])) {
+
+
+    $galeri_kapak_baslik = $_POST['galeri_kapak_baslik'];
+    $galeri_durum = $_POST['galeri_durum'];
+    $uploads_dir1 = 'resimler/galeri_resimler';
+    @$tmp_name = $_FILES['galeri_kapak_resim']["tmp_name"];
+    @$name = $_FILES['galeri_kapak_resim']["name"];
+    $sayi1 = rand(1, 9999);
+    $resimyolu1 = $sayi1 . $name;
+    @move_uploaded_file($tmp_name, "$uploads_dir1/$sayi1$name");
+
+    $duzenle = $conn->prepare("INSERT INTO galeri SET
+    
+        galeri_kapak_baslik=:galeri_kapak_baslik,
+        galeri_durum=:galeri_durum,
+        galeri_kapak_resim=:galeri_kapak_resim
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'galeri_kapak_baslik' => $galeri_kapak_baslik,
+        'galeri_durum' => $galeri_durum,
+        'galeri_kapak_resim' => $resimyolu1
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:galeri.php?yuklenme=basarili");
+    } else {
+        header("Location:galeri.php?yuklenme=basarisiz");
+    }
+}
+
+
+if (isset($_GET['galeri_sil'])){
+
+    $linkk = $_GET['id'];
+    $galeri = $conn->prepare("SELECT * FROM galeri WHERE galeri_id='$linkk'");
+    $galeri->execute();
+    $galeri_cek = $link->fetch(PDO::FETCH_ASSOC);
+    $resimsil1 = $link_cek['link_kapak_resim'];
+
+
+    $galeri_sil = $conn->prepare("DELETE FROM galeri  WHERE galeri_id=:galeri_id");
+
+    $galeri_sil->execute(['galeri_id'=> $_GET['id']]);
+
+
+    if (galeri_sil) {
+        unlink("resimler/galeri_resimler/$resimsil1");
+        header("Location:galeri.php?durum=basarili");
+
+    } else {
+        header("Location:galeri.php?durum=basarisiz");
+    }
+
+
+}
+
+
+
+
+if (isset($_GET['yazilarim_sil'])){
+
+    $yazilarimm = $_GET['id'];
+    $yazilarim = $conn->prepare("SELECT * FROM yazilarim WHERE yazilarim_id='$yazilarimm'");
+    $yazilarim->execute();
+    $yazilarim_cek = $yazilarim->fetch(PDO::FETCH_ASSOC);
+    $resimsil1 = $yazilarim_cek['yazilarim_resim'];
+
+
+    $yazilarim_sil = $conn->prepare("DELETE FROM yazilarim  WHERE yazilarim_id=:yazilarim_id");
+
+    $yazilarim_sil->execute(['yazilarim_id'=> $_GET['id']]);
+
+
+    if (yazilarim_sil) {
+        unlink("resimler/yazilarim_resimler/$resimsil1");
+        header("Location:yazilarim.php?durum=basarili");
+
+    } else {
+        header("Location:yazilarim.php?durum=basarisiz");
+    }
+
+
+}
+
+
+if (isset($_POST['yazilarim_ekle_gonder'])) {
+
+
+    $yazilarim_kapak_baslik = $_POST['yazilarim_kapak_baslik'];
+    $yazilarim_durum = $_POST['yazilarim_durum'];
+    $yazilarim_yazi = $_POST['yazilarim_yazi'];
+    $uploads_dir1 = 'resimler/yazilarim_resimler';
+    @$tmp_name = $_FILES['yazilarim_resim']["tmp_name"];
+    @$name = $_FILES['yazilarim_resim']["name"];
+    $sayi1 = rand(1, 9999);
+    $resimyolu1 = $sayi1 . $name;
+    @move_uploaded_file($tmp_name, "$uploads_dir1/$sayi1$name");
+
+    $duzenle = $conn->prepare("INSERT INTO yazilarim SET
+    
+        yazilarim_kapak_baslik=:yazilarim_kapak_baslik,
+        yazilarim_resim=:yazilarim_resim,
+        yazilarim_yazi=:yazilarim_yazi,
+        yazilarim_durum=:yazilarim_durum
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'yazilarim_kapak_baslik' => $yazilarim_kapak_baslik,
+        'yazilarim_resim' => $resimyolu1,
+        'yazilarim_yazi' => $yazilarim_yazi,
+        'yazilarim_durum' => $yazilarim_durum
+
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:yazilarim.php?yuklenme=basarili");
+    } else {
+        header("Location:yazilarim.php?yuklenme=basarisiz");
+    }
+}
+
 
 
 ?>
