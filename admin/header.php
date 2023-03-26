@@ -161,7 +161,7 @@ License: For each use you must have a valid license purchased only from above li
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="demo1/pages/apps/calendar.html" class="nav-link">
+                    <a href="iletisim.php" class="nav-link">
                         <i class="link-icon" data-feather="calendar"></i>
                         <span class="link-title">İletişim</span>
                     </a>

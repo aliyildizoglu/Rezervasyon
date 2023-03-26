@@ -578,13 +578,13 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                     <?php
                     $yazilarim = $conn->prepare("SELECT * FROM yazilarim WHERE  yazilarim_durum = '0'");
                     $yazilarim->execute(['yazilarim_durum' => '0']);
-
+                    $say =0;
                     while ($yazilarim_cek = $yazilarim->fetch(PDO::FETCH_ASSOC)){
-
+                    $say++;
                     ?>
                     <div class="box-item f-content">
                         <div class="image">
-                            <a href="#popup-1" class="has-popup-media hover-animated">
+                            <a href="#popup-<?php echo $say ?>" class="has-popup-media hover-animated">
                                 <img src="admin/resimler/yazilarim_resimler/<?php echo $yazilarim_cek['yazilarim_resim'] ?>" class="wp-post-image" alt="sjdfjaskdfjk"/>
                                 <span class="info circle">
 										<span class="centrize full-width">
@@ -599,7 +599,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 									</span>
                             </a>
                         </div>
-                        <div id="popup-1" class="popup-box mfp-fade mfp-hide">
+                        <div id="popup-<?php echo $say ?>" class="popup-box mfp-fade mfp-hide">
                             <div class="content">
                                 <div class="image" style="background-image: url(admin/resimler/yazilarim_resimler/<?php echo $yazilarim_cek['yazilarim_resim'] ?>);"></div>
                                 <div class="desc single-post-text">
@@ -627,38 +627,21 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 
                 <!-- contacts items -->
                 <div class="service-items">
+                    <?php
+                    $iletisim = $conn->prepare("SELECT * FROM iletisim WHERE  iletisim_durum= '0'");
+                    $iletisim->execute(['isler_durum' => '0']);
+                    while ($iletisim_cek = $iletisim->fetch(PDO::FETCH_ASSOC)){
+                    ?>
 
                     <div class="service-col">
                         <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-phone"></span></div>
-                            <div class="name">Telefon</div>
-                            <div class="text">+90 (555) 555 55 55</div>
+                            <div class="icon"><span class="<?php echo $iletisim_cek['iletisim_ikon'] ?>>"></span></div>
+                            <div class="name"><?php echo $iletisim_cek['iletisim_baslik'] ?></div>
+                            <div class="text"><?php echo $iletisim_cek['iletisim_aciklama'] ?></div>
                         </div>
                     </div>
 
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fas fa-envelope"></span></div>
-                            <div class="name">Email</div>
-                            <div class="text"><a href="mailto:steve-pearson@gmail.com">test@gmail.com</a></div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fab fa-instagram"></span></div>
-                            <div class="name">Instagram</div>
-                            <div class="text">2621 W Pico Blvd, Los Angeles</div>
-                        </div>
-                    </div>
-
-                    <div class="service-col">
-                        <div class="service-item content-box">
-                            <div class="icon"><span class="fab fa-snapchat"></span></div>
-                            <div class="name">Snapchat</div>
-                            <div class="text">2621 W Pico Blvd, Los Angeles</div>
-                        </div>
-                    </div>
+                    <?php } ?>
 
                 </div>
 

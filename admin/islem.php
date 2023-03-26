@@ -1009,21 +1009,21 @@ if (isset($_POST['yazilarim_ekle_gonder'])) {
 
 
     $yazilarim_kapak_baslik = $_POST['yazilarim_kapak_baslik'];
-    $yazilarim_durum = $_POST['yazilarim_durum'];
     $yazilarim_yazi = $_POST['yazilarim_yazi'];
-    $uploads_dir1 = 'resimler/yazilarim_resimler';
+    $yazilarim_durum = $_POST['yazilarim_durum'];
+    $uploads_dir = 'resimler/yazilarim_resimler';
     @$tmp_name = $_FILES['yazilarim_resim']["tmp_name"];
     @$name = $_FILES['yazilarim_resim']["name"];
     $sayi1 = rand(1, 9999);
     $resimyolu1 = $sayi1 . $name;
-    @move_uploaded_file($tmp_name, "$uploads_dir1/$sayi1$name");
+    @move_uploaded_file($tmp_name, "$uploads_dir/$sayi1$name");
 
     $duzenle = $conn->prepare("INSERT INTO yazilarim SET
     
         yazilarim_kapak_baslik=:yazilarim_kapak_baslik,
-        yazilarim_resim=:yazilarim_resim,
         yazilarim_yazi=:yazilarim_yazi,
-        yazilarim_durum=:yazilarim_durum
+        yazilarim_durum=:yazilarim_durum,
+        yazilarim_resim=:yazilarim_resim
 
             
                  
@@ -1032,10 +1032,9 @@ if (isset($_POST['yazilarim_ekle_gonder'])) {
     $insert = $duzenle->execute([
 
         'yazilarim_kapak_baslik' => $yazilarim_kapak_baslik,
-        'yazilarim_resim' => $resimyolu1,
         'yazilarim_yazi' => $yazilarim_yazi,
-        'yazilarim_durum' => $yazilarim_durum
-
+        'yazilarim_durum' => $yazilarim_durum,
+        'yazilarim_resim' => $resimyolu1
     ]);
 
 
@@ -1048,6 +1047,104 @@ if (isset($_POST['yazilarim_ekle_gonder'])) {
     }
 }
 
+
+if (isset($_POST['iletisim_duzenle_gonder'])) {
+
+
+    $iletisim_id = $_POST['iletisim_id'];
+    $iletisim_ikon = $_POST['iletisim_ikon'];
+    $iletisim_baslik = $_POST['iletisim_baslik'];
+    $iletisim_aciklama = $_POST['iletisim_aciklama'];
+    $iletisim_durum = $_POST['iletisim_durum'];
+
+    $duzenle = $conn->prepare("UPDATE iletisim SET
+    
+        iletisim_ikon=:iletisim_ikon,
+        iletisim_baslik=:iletisim_baslik,
+        iletisim_aciklama=:iletisim_aciklama,
+        iletisim_durum=:iletisim_durum
+
+        WHERE iletisim_id = '$iletisim_id'
+                 
+                 ");
+
+    $update = $duzenle->execute([
+
+        'iletisim_ikon' => $iletisim_ikon,
+        'iletisim_baslik' => $iletisim_baslik,
+        'iletisim_aciklama' => $iletisim_aciklama,
+        'iletisim_durum' => $iletisim_durum
+    ]);
+
+
+    if ($update) {
+
+
+        header("Location:iletisim-duzenle.php?id=$iletisim_id?yuklenme=basarili");
+    } else {
+        header("Location:iletisim-duzenle.php?id='$iletisim_id'&yuklenme=basarisiz");
+    }
+
+}
+
+
+
+if (isset($_POST['iletisim_ekle_gonder'])) {
+
+
+    $iletisim_ikon = $_POST['iletisim_ikon'];
+    $iletisim_baslik = $_POST['iletisim_baslik'];
+    $iletisim_aciklama = $_POST['iletisim_aciklama'];
+    $iletisim_durum = $_POST['iletisim_durum'];
+
+    $duzenle = $conn->prepare("INSERT INTO iletisim SET
+    
+        iletisim_ikon=:iletisim_ikon,
+        iletisim_baslik=:iletisim_baslik,
+        iletisim_aciklama=:iletisim_aciklama,
+        iletisim_durum=:iletisim_durum
+
+            
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'iletisim_ikon' => $iletisim_ikon,
+        'iletisim_baslik' => $iletisim_baslik,
+        'iletisim_aciklama' => $iletisim_aciklama,
+        'iletisim_durum' => $iletisim_durum
+    ]);
+
+
+    if ($insert) {
+
+
+        header("Location:iletisim.php?yuklenme=basarili");
+    } else {
+        header("Location:iletisim.php?yuklenme=basarisiz");
+    }
+
+}
+
+if (isset($_GET['iletisim_sil'])){
+
+    $iletisim_sil = $conn->prepare("DELETE FROM iletisim  WHERE iletisim_id=:iletisim_id");
+
+    $iletisim_sil->execute(['iletisim_id'=> $_GET['id']]);
+
+
+    if (iletisim_sil) {
+        header("Location:iletisim.php?durum=basarili");
+
+    } else {
+        header("Location:iletisim.php?durum=basarisiz");
+    }
+
+
+
+
+}
 
 
 ?>

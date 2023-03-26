@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <h6 class="card-title">Yazılarım </h6>
-                    <form class="forms-sample" method="POST" action="islem.php">
+                    <form class="forms-sample" method="POST" action="islem.php" enctype="multipart/form-data">
                         <div class="mb-3">
                             <label for="exampleInputUsername1" class="form-label">Yazılarım Kapak Başlığı </label>
                             <input type="text" class="form-control" id="exampleInputUsername1" name="yazilarim_kapak_baslik" autocomplete="off"  placeholder="Aşağıdaki ikonu seçiniz" required>
