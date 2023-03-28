@@ -1146,5 +1146,39 @@ if (isset($_GET['iletisim_sil'])){
 
 }
 
+if(isset($_POST['tema_rengi_gonder'])){
+
+    $tema_rengi_durum = $_POST['tema_rengi_durum'];
+
+    $duzenle = $conn->prepare("UPDATE tema SET 
+                    
+     tema_rengi_durum=:tema_rengi_durum
+                
+      WHERE tema_id = 1
+                          
+                             ");
+
+    $update = $duzenle->execute([
+
+        'tema_rengi_durum' => $tema_rengi_durum
+
+    ]);
+
+    if ($update){
+
+        header("Location:tema-rengi.php?durum=basarili");
+
+    }else{
+
+        header("Location:tema-rengi.php?durum=basarisiz");
+    }
+
+
+
+
+
+
+}
+
 
 ?>
