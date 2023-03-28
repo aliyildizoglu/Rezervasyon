@@ -36,22 +36,54 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/animate.css"/>
     <link rel="stylesheet" href="css/jarallax.css"/>
     <link rel="stylesheet" href="css/swiper.css"/>
-    <link rel="stylesheet" href="css/fontawesome.min.css"/>
     <link rel="stylesheet" href="css/all.min.css"/>
     <link rel="stylesheet" href="css/brands.min.css"/>
     <link rel="stylesheet" href="css/solid.min.css"/>
+    <link rel="stylesheet" href="css/fontawesome.min.css"/>
 
     <!-- Theme Colors -->
-    <!--	<link rel="stylesheet" href="css/theme-colors/blue.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/green.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/orange.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/brown.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/purple.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/red.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/beige.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/green_light.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/yellow.css" />-->
-    <!--	<link rel="stylesheet" href="css/theme-colors/yellow_light.css" />-->
+
+    <?php
+
+
+    $tema = $conn->prepare("SELECT * FROM  tema WHERE tema_id = 1");
+    $tema->execute();
+    $tema_cek = $tema->fetch(PDO::FETCH_ASSOC);
+
+    if($tema_cek['tema_rengi_durum'] == 0){ ?>
+      	<link rel="stylesheet" href="css/theme-colors/blue.css" />
+     <?php }
+    if($tema_cek['tema_rengi_durum'] == 1){ ?>
+    <link rel="stylesheet" href="css/theme-colors/green.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 2){ ?>
+    <link rel="stylesheet" href="css/theme-colors/orange.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 3){ ?>
+    <link rel="stylesheet" href="css/theme-colors/brown.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 4){ ?>
+    <link rel="stylesheet" href="css/theme-colors/purple.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 5){ ?>
+    <link rel="stylesheet" href="css/theme-colors/red.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 6){ ?>
+    <link rel="stylesheet" href="css/theme-colors/beige.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 7){ ?>
+    <link rel="stylesheet" href="css/theme-colors/green_light.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 8){ ?>
+    <link rel="stylesheet" href="css/theme-colors/yellow.css" />
+    <?php }
+    if($tema_cek['tema_rengi_durum'] == 9){ ?>
+    <link rel="stylesheet" href="css/theme-colors/yellow_light.css" />
+    <?php } ?>
+
+
+
+
 
 
     <!--[if lt IE 9]>

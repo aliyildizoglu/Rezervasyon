@@ -17,7 +17,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputUsername1" class="form-label">Beceri Bilgi Yüzdesi</label>
-                            <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="off" name="beceri_bilgi"  required placeholder="Yaptığınız İşler ile Alakalı Başlık Oluşturunuz">
+                            <input type="text" class="form-control" id="exampleInputUsername1" autocomplete="off" name="beceri_bilgi"  required placeholder="Yaptığınız İşler ile Alakalı Başlık Oluşturunuz" >
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlSelect1" class="form-label">Yayınlanma Durumunu Seçiniz</label>
