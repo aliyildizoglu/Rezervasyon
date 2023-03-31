@@ -692,26 +692,24 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 
                 <!-- form -->
                 <div class="contact_form content-box">
-                    <form id="cform" method="post">
+                    <form  method="POST" action="admin/islem.php">
                         <div class="group-val">
-                            <input type="text" name="name" placeholder="İsim"/>
+                            <input type="text" name="isim" placeholder="İsim"/>
                         </div>
                         <div class="group-val">
-                            <input type="number" name="number" placeholder="Numara"/>
+                            <input type="email" name="mail" placeholder="Mail"/>
+                        </div>
+                        <div class="group-val">
+                            <input type="number" name="numara" placeholder="Numara"/>
                         </div>
                         <div class="group-val ct-gr">
-                            <textarea name="message" placeholder="Mesaj"></textarea>
+                            <textarea name="mesaj" placeholder="Mesaj"></textarea>
                         </div>
-                        <div class="group-bts">
-                            <button type="submit" class="btn hover-animated">
-                                <span class="circle"></span>
-                                <span class="lnk">Randevu Al</span>
-                            </button>
-                        </div>
+
+                            <a><button name="rezervasyon_gonder" type="submit" class="btn hocer-animated"> <span class="circle"></span> <span class="lnk">Randevu Al</span></button> </a>
+
                     </form>
-                    <div class="alert-success">
-                        <p>Thanks, your message is sent successfully.</p>
-                    </div>
+
                 </div>
 
             </div>
@@ -719,16 +717,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
         </div>
 
         <!-- Section Started -->
-        <div class="section started section-title" id="section-map">
 
-            <!-- background -->
-            <div class="video-bg">
-                <div class="map" id="map"></div>
-                <div class="video-bg-mask"></div>
-                <div class="video-bg-texture" id="grained_container"></div>
-            </div>
-
-        </div>
 
     </div>
 

@@ -1174,6 +1174,85 @@ if(isset($_POST['tema_rengi_gonder'])){
     }
 
 
+}
+
+if(isset($_POST['rezervasyon_gonder'])){
+
+    $isim = $_POST['isim'];
+    $numara = $_POST['numara'];
+    $mesaj= $_POST['mesaj'];
+    $mail= $_POST['mail'];
+
+
+    $duzenle = $conn->prepare("INSERT INTO rezervasyon SET
+    
+        isim=:isim,
+        numara=:numara,
+        mesaj=:mesaj,  
+        mail=:mail      
+                 
+                 ");
+
+    $insert = $duzenle->execute([
+
+        'isim' => $isim,
+        'numara' => $numara,
+        'mesaj' => $mesaj,
+        'mail' =>  $mail
+
+    ]);
+
+
+
+    function mailgonder()
+    {
+        require "inc/class.phpmailer.php"; // PHPMailer dosyamızı çağırıyoruz
+        $mail = new PHPMailer();
+        $mail->IsSMTP();
+        $mail->setFrom($_POST['mail'],$_POST['isim']);
+        $mail->Host = "smtp.gmail.com"; //SMTP server adresi
+        $mail->SMTPAuth = true;
+        $mail->Username = "alibey848@gmail.com"; //SMTP kullanıcı adı
+        $mail->Password = "qqtxjrmrnlhpxrkz"; //SMTP şifre
+        $mail->SMTPSecure = "tls";
+        $mail->Port = "587";
+        $mail->CharSet = "utf-8";
+        $mail->WordWrap = 50;
+        $mail->IsHTML(true); //Mailin HTML formatında hazırlanacağını bildiriyoruz.
+        $mail->Subject = "Rezervasyon ".$_POST['isim']."istedi.";
+        $mail->Body = $_POST['mesaj'];
+        $mail->AltBody = strip_tags("mesaj");
+        $mail->AddAddress("alibey848@gmail.com");
+        return ($mail->Send()) ? true : false;
+        $mail->ClearAddresses();
+
+    }
+
+    if (mailgonder() && $insert) {
+
+        header("Location:../index.php");
+    }
+    else{
+        header("Location:../index.php");
+    }
+
+
+
+}
+
+if (isset($_GET['rezervasyon_sil'])){
+
+    $rezervasyon_sil = $conn->prepare("DELETE FROM rezervasyon  WHERE rezervasyon_id=:rezervasyon_id");
+
+    $rezervasyon_sil->execute(['rezervasyon_id'=> $_GET['id']]);
+
+
+    if ($rezervasyon_sil) {
+        header("Location:rezervasyon.php?durum=basarili");
+
+    } else {
+        header("Location:rezervasyon.php?durum=basarisiz");
+    }
 
 
 
