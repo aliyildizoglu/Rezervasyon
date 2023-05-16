@@ -1,4 +1,7 @@
-<?php include 'conn.php' ?>
+<?php include 'conn.php';
+session_start();
+?>
+
 <?php
 
 if (isset($_POST['anasayfa_gonder'])) {
@@ -1258,6 +1261,102 @@ if (isset($_GET['rezervasyon_sil'])){
 
 
 }
+
+
+
+if(isset($_POST['wp_gonder'])){
+
+    $wp_durum = $_POST['wp_durum'];
+    $wp_mesaj = $_POST['wp_mesaj'];
+
+    $duzenle = $conn->prepare("UPDATE wp SET 
+                    
+     wp_durum=:wp_durum,
+     wp_mesaj=:wp_mesaj
+                
+      WHERE wp_id = 1
+                          
+                             ");
+
+    $update = $duzenle->execute([
+
+        'wp_durum' => $wp_durum,
+        'wp_mesaj' => $wp_mesaj
+
+    ]);
+
+    if ($update){
+
+        header("Location:wp.php?durum=basarili");
+
+    }else{
+
+        header("Location:wp.php?durum=basarisiz");
+    }
+
+
+}
+
+if(isset($_POST['kullanici_ekle'])){
+
+    $kullanici_adi = $_POST['kullanici_adi'];
+    $kullanici_sifre = $_POST['kullanici_sifre'];
+    $kullanici_sifre1 = $_POST['kullanici_sifre1'];
+
+    if ($kullanici_sifre ==  $kullanici_sifre1){
+
+
+        $hashed_sifre = password_hash($kullanici_sifre, PASSWORD_BCRYPT);
+
+        $duzenle = $conn->prepare("INSERT INTO kullanici SET 
+                    
+        kullanici_adi =:kullanici_adi,
+        kullanici_sifre =:kullanici_sifre
+                          
+                          ");
+        $insert = $duzenle->execute([
+
+            'kullanici_adi' => $kullanici_adi,
+            'kullanici_sifre' => $hashed_sifre
+        ]);
+
+
+        if ($insert){
+            header("Location:kullanicilar.php");
+        }else{
+            header("Locotion:kullanicilar.php");
+        }
+
+    }else{
+        header("Location:kullanici.php");
+    }
+
+}
+if (isset($_POST['giris_yap'])) {
+
+    $kullanici = $conn->prepare("SELECT * FROM kullanici WHERE kullanici_adi = ?");
+    $kullanici->execute(array($_POST['kullanici_adi']));
+    $kullanici_cek = $kullanici->fetch(PDO::FETCH_ASSOC);
+
+    if ($kullanici->rowCount() == 1) {
+        $hashed_sifre = $kullanici_cek['kullanici_sifre'];
+
+        // Şifreyi doğrulayın
+        if (password_verify($_POST['kullanici_sifre'], $hashed_sifre)) {
+            // Giriş başarılı, oturum başlatın ve ana sayfaya yönlendirin
+            $_SESSION['kullanici_adi'] = $kullanici_cek['kullanici_adi'];
+            header("Location: index.php");
+            exit();
+        } else {
+            // Giriş başarısız, hata mesajı gösterin
+            header("Location: login.php");
+        }
+    } else {
+        // Kullanıcı bulunamadı, hata mesajı gösterin
+        header("Location: login.php");
+    }
+}
+
 
 
 ?>

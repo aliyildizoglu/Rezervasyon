@@ -29,7 +29,7 @@
 
                         <div class="mb-3">
 
-                            <input type="file"  class="form-control"  autocomplete="off" name="galeri_kapak_resim" required>
+                            <input type="file"  class="form-control"  autocomplete="off" name=" " required>
                         </div>
 
 

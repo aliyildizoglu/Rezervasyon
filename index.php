@@ -41,6 +41,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="css/solid.min.css"/>
     <link rel="stylesheet" href="css/fontawesome.min.css"/>
 
+
     <!-- Theme Colors -->
 
     <?php
@@ -92,6 +93,25 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
     <![endif]-->
 
     <link rel="shortcut icon" href="images/favicons/favicon.ico">
+    <?php
+    $wp = $conn->prepare("SELECT * FROM wp WHERE  wp_durum= '0'");
+    $wp->execute(['wp_durum' => '0']);
+    while ($wp_cek = $wp->fetch(PDO::FETCH_ASSOC)){
+    ?>
+    <script type="text/javascript">
+        (function () {
+            var options = {
+                whatsapp: "<?php echo $hakkimda_cek['hakkimizda_telefon'] ?>",
+                call_to_action: "<?php echo $wp_cek['wp_mesaj'] ?>",
+                position: "left",
+            };
+            var proto = document.location.protocol, host = "getbutton.io", url = proto + "//static." + host;
+            var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = url + '/widget-send-button/js/init.js';
+            s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+            var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+        })();
+    </script>
+    <?php } ?>
 
 </head>
 
@@ -125,7 +145,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
             <!-- logo -->
             <div class="logo hover-masks-logo">
                 <a href="#">
-                    <span class="mask-lnk">Kutluhan <strong>Azaflı</strong></span>
+                    <span class="mask-lnk">Ali <strong>Yıldızoğlu</strong></span>
                     <span class="mask-lnk mask-lnk-hover">Ali <strong>Yıldızoğlu</strong></span>
                 </a>
             </div>
@@ -619,7 +639,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                             <a href="#popup-<?php echo $say ?>" class="has-popup-media hover-animated">
                                 <img src="admin/resimler/yazilarim_resimler/<?php echo $yazilarim_cek['yazilarim_resim'] ?>" class="wp-post-image" alt="sjdfjaskdfjk"/>
                                 <span class="info circle">
-										<span class="centrize full-width">
+			 							<span class="centrize full-width">
 											<span class="vertical-center">
 												<span class="icon fas fa-plus"></span>
 												<span class="desc">
@@ -667,7 +687,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 
                     <div class="service-col">
                         <div class="service-item content-box">
-                            <div class="icon"><span class="<?php echo $iletisim_cek['iletisim_ikon'] ?>>"></span></div>
+                            <div class="icon"><span class="<?php echo $iletisim_cek['iletisim_ikon']?>"</span></div>
                             <div class="name"><?php echo $iletisim_cek['iletisim_baslik'] ?></div>
                             <div class="text"><?php echo $iletisim_cek['iletisim_aciklama'] ?></div>
                         </div>
@@ -723,22 +743,18 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="copy">
-            <p>E: test@gmail.com</p>
-            <p>T: +90 (555) 555 55 55</p>
-        </div>
         <div class="soc-box">
             <div class="follow-label">Beni Takip Et</div>
             <div class="soc">
-                <a target="_blank" href="https://www.pinterest.com/">
-                    <span class="icon fab fa-pinterest"></span>
+                <?php
+                $iletisim = $conn->prepare("SELECT * FROM iletisim WHERE  iletisim_durum= '0'");
+                $iletisim->execute(['isler_durum' => '0']);
+                while ($iletisim_cek = $iletisim->fetch(PDO::FETCH_ASSOC)){
+                ?>
+                <a target="_blank" href="<?php echo $iletisim_cek['iletisim_aciklama']  ?>">
+                    <span class="<?php echo $iletisim_cek['iletisim_ikon'] ?>"></span>
                 </a>
-                <a target="_blank" href="https://www.instagram.com/">
-                    <span class="icon fab fa-instagram"></span>
-                </a>
-                <a target="_blank" href="https://dribbble.com/">
-                    <span class="icon fab fa-dribbble"></span>
-                </a>
+                <?php } ?>
             </div>
         </div>
         <div class="clear"></div>
