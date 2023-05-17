@@ -2,16 +2,15 @@
 <?php include 'islem.php' ?>
 
 <?php
-$kullanici = $conn->prepare("SELECT * FROM kullanici where kullanici_adi =?");
-$kullanici->execute();
-$kullanici_cek = $kullanici->fetch(PDO::FETCH_ASSOC);
-if ($_SESSION['kullanici_adi'] == $kullanici_cek['kullanici_adi'] ){
-    session_destroy();
-    session_unset();
+$kullanicisor =$conn->prepare("SELECT * FROM kullanici WHERE kullanici_adi=:kullanici_adi");
+$kullanicisor->execute(['kullanici_adi'=>$_SESSION['kullanici_adi']]);
+$var =$kullanicisor->rowCount();
 
 
+if ($var == 0) {
+
+    header("Location:login?durum=izinsizgiris");
 }
-
 
 
 
@@ -94,72 +93,69 @@ License: For each use you must have a valid license purchased only from above li
                 <li class="nav-item nav-category">Main</li>
                 <li class="nav-item">
                     <a href="index.php" class="nav-link">
-                        <i class="link-icon" data-feather="box"></i>
+                        <i class="link-icon" data-feather="activity"></i>
                         <span class="link-title">Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item nav-category">Ayarlar</li>
                 <li class="nav-item">
                     <a href="anasayfa.php" class="nav-link">
-                        <i class="link-icon" data-feather="message-square"></i>
+                        <i class="link-icon" data-feather="home"></i>
                         <span class="link-title">Anasayfa</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="hakkimda.php" class="nav-link">
-                        <i class="link-icon" data-feather="calendar"></i>
+                        <i class="link-icon" data-feather="user"></i>
                         <span class="link-title">Hakkımda</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="isler.php" class="nav-link">
-                        <i class="link-icon" data-feather="clock"></i>
+                        <i class="link-icon" data-feather="briefcase"></i>
                         <span class="link-title">Yaptığım İşler</span>
                     </a>
-                </li> <li class="nav-item">
+                </li>
+                <li class="nav-item">
                     <a href="beceri.php" class="nav-link">
-                        <i class="link-icon" data-feather="code"></i>
+                        <i class="link-icon" data-feather="star"></i>
                         <span class="link-title">Becerilerim</span>
                     </a>
                 </li>
-                </li> <li class="nav-item">
+                <li class="nav-item">
                     <a href="dil.php" class="nav-link">
-                        <i class="link-icon" data-feather="home"></i>
+                        <i class="link-icon" data-feather="globe"></i>
                         <span class="link-title">Bildiğim Diller</span>
                     </a>
                 </li>
-                </li> <li class="nav-item">
+                <li class="nav-item">
                     <a href="bilgi.php" class="nav-link">
-                        <i class="link-icon" data-feather="home"></i>
+                        <i class="link-icon" data-feather="info"></i>
                         <span class="link-title">Bilgiler</span>
                     </a>
                 </li>
-                </li>
                 <li class="nav-item">
                     <a href="hobi.php" class="nav-link">
-                        <i class="link-icon" data-feather="home"></i>
+                        <i class="link-icon" data-feather="heart"></i>
                         <span class="link-title">Hobiler</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="insanlar.php" class="nav-link">
-                        <i class="link-icon" data-feather="home"></i>
+                        <i class="link-icon" data-feather="users"></i>
                         <span class="link-title">Hakkımda Söyledikleri</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="yazi-alani.php" class="nav-link">
-                        <i class="link-icon" data-feather="home"></i>
+                        <i class="link-icon" data-feather="pen-tool"></i>
                         <span class="link-title">Serbest Yazı Alanı</span>
                     </a>
                 </li>
 
-
-
-
                 <li class="nav-item">
                     <a class="nav-link"  data-bs-toggle="collapse" href="#charts" role="button" aria-expanded="false" aria-controls="charts">
-                        <i class="link-icon" data-feather="pie-chart"></i>
+                        <i class="link-icon" data-feather="image"></i>
                         <span class="link-title">Fotoğraflarım</span>
                         <i class="link-arrow" data-feather="chevron-down"></i>
                     </a>
@@ -187,18 +183,16 @@ License: For each use you must have a valid license purchased only from above li
                 </li>
                 <li class="nav-item">
                     <a href="iletisim.php" class="nav-link">
-                        <i class="link-icon" data-feather="calendar"></i>
+                        <i class="link-icon" data-feather="phone"></i>
                         <span class="link-title">İletişim</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="tema-rengi.php" class="nav-link">
-                        <i class="link-icon" data-feather="calendar"></i>
+                        <i class="link-icon" data-feather="palette"></i>
                         <span class="link-title">Tema Rengi</span>
                     </a>
                 </li>
-
-
 
                 <li class="nav-item">
                     <a href="rezervasyon.php" class="nav-link">
@@ -209,13 +203,20 @@ License: For each use you must have a valid license purchased only from above li
 
                 <li class="nav-item">
                     <a href="wp.php" class="nav-link">
-                        <i class="link-icon" data-feather="calendar"></i>
+                        <i class="link-icon" data-feather="wp"></i>
                         <span class="link-title">Whatsapp</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="kullanicilar.php" class="nav-link">
+                        <i class="link-icon" data-feather="wp"></i>
+                        <span class="link-title">Yöneticiler</span>
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
+
 
     <!-- partial -->
 

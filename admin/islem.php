@@ -1358,5 +1358,48 @@ if (isset($_POST['giris_yap'])) {
 }
 
 
+if (isset($_GET['kullanici_sil'])){
+
+    $kullanici_sil = $conn->prepare("DELETE FROM kullanici  WHERE kullanici_id=:kullanici_id");
+
+    $kullanici_sil->execute(['kullanici_id'=> $_GET['id']]);
+
+
+    if (kullanici_sil) {
+        header("Location:kullanicilar.php?durum=basarili");
+
+    } else {
+        header("Location:kullanicilar.php?durum=basarisiz");
+    }
+
+
+
+
+}
+
+if(isset($_GET['hepsini_sil_rezervasyon'])){
+
+    $hrezervasyon_sil = $conn->prepare("DELETE FROM rezervasyon");
+    $hrezervasyon_sil ->execute([]);
+
+    if ($hrezervasyon_sil){
+        header("LOcation:rezervasyon.php?durum=basarili");
+    }else{
+
+        header("LOcation:rezervasyon.php?durum=basarisiz");
+
+    }
+
+
+
+
+
+
+
+
+
+}
+
+
 
 ?>

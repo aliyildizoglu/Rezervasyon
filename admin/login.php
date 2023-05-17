@@ -1,5 +1,6 @@
 <?php include 'conn.php'?>
-
+<?php include 'islem.php'?>
+<?php session_destroy(); ?>
 <!DOCTYPE html>
 <!--
 Template Name: NobleUI - HTML Bootstrap 5 Admin Dashboard Template

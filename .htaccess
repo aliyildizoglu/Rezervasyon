@@ -1,0 +1,16 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+
+
+Options All -indexes
+
+ErrorDocument 403 /Rezervasyon/css/403.php
+ErrorDocument 403 /Rezervasyon/doc/403.php
+ErrorDocument 403 /Rezervasyon/images/403.php
+ErrorDocument 403 /Rezervasyon/js/403.php
+ErrorDocument 403 /Rezervasyon/mailer/403.php
+ErrorDocument 403 /Rezervasyon/style/403.php
+
+ErrorDocument 404 /Rezervasyon/404.php

@@ -8,6 +8,7 @@
             <div class="card">
 
                 <div class="card-body">
+                    <a href="islem.php?hepsini_sil_rezervasyon"><button style="float: right" type="submit" class="btn btn-danger">Hepsini Sil</button> </a>
 
                     <h6 class="card-title">Rezervasyon </h6>
                     <div class="table-responsive">

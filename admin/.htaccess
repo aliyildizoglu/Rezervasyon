@@ -1,0 +1,13 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+
+
+Options All -indexes
+
+ErrorDocument 404 /admin/404.php
+ErrorDocument 403 /admin/assets/403.php
+ErrorDocument 403 /admin/ckeditor/403.php
+ErrorDocument 403 /admin/inc/403.php
+ErrorDocument 403 /admin/resimler/403.php
