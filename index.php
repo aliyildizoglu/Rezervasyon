@@ -511,10 +511,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                             <label data-text="Links"><input type="radio" name="fl_radio" value=".f-links"/>Link</label>
                         </div>
 
-                        <div class="btn-group">
-                            <label data-text="Gallery"><input type="radio" name="fl_radio"
-                                                              value=".f-gallery"/>Galeri</label>
-                        </div>
+
                         <div class="btn-group">
                             <label data-text="Content"><input type="radio" name="fl_radio"
                                                               value=".f-content"/>Yazılarım</label>

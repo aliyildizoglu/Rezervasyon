@@ -9,7 +9,7 @@ $var =$kullanicisor->rowCount();
 
 if ($var == 0) {
 
-    header("Location:login?durum=izinsizgiris");
+    header("Location:404.php");
 }
 
 
@@ -171,9 +171,7 @@ License: For each use you must have a valid license purchased only from above li
                                 <a href="link.php" class="nav-link">Link</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a href="galeri" class="nav-link">Galeri</a>
-                            </li>
+
                             <li class="nav-item">
                                 <a href="yazilarim.php" class="nav-link">Yazılarım</a>
                             </li>
@@ -189,7 +187,7 @@ License: For each use you must have a valid license purchased only from above li
                 </li>
                 <li class="nav-item">
                     <a href="tema-rengi.php" class="nav-link">
-                        <i class="link-icon" data-feather="palette"></i>
+                        <i class="link-icon" data-feather="code"></i>
                         <span class="link-title">Tema Rengi</span>
                     </a>
                 </li>
@@ -203,16 +201,18 @@ License: For each use you must have a valid license purchased only from above li
 
                 <li class="nav-item">
                     <a href="wp.php" class="nav-link">
-                        <i class="link-icon" data-feather="wp"></i>
+                        <i class="link-icon" data-feather="message-circle"></i>
                         <span class="link-title">Whatsapp</span>
                     </a>
                 </li>
+
                 <li class="nav-item">
                     <a href="kullanicilar.php" class="nav-link">
-                        <i class="link-icon" data-feather="wp"></i>
+                        <i class="link-icon" data-feather="users"></i>
                         <span class="link-title">Yöneticiler</span>
                     </a>
                 </li>
+
             </ul>
         </div>
     </nav>
