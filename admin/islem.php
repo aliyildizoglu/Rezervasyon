@@ -1016,9 +1016,9 @@ if (isset($_POST['iletisim_duzenle_gonder'])) {
     if ($update) {
 
 
-        header("Location:iletisim-duzenle.php?id=$iletisim_id?yuklenme=basarili");
+        header("Location:iletisim.php?yuklenme=basarili");
     } else {
-        header("Location:iletisim-duzenle.php?id='$iletisim_id'&yuklenme=basarisiz");
+        header("Location:iletisim.php?yuklenme=basarisiz");
     }
 
 }
@@ -1142,13 +1142,19 @@ if(isset($_POST['rezervasyon_gonder'])){
 
     function mailgonder()
     {
+
+        $hakkimizda = $conn->prepare("SELECT * FROM  hakkimizda WHERE hakkimizda_id=1");
+        $hakkimizda->execute();
+        $hakkimizda_cek = $hakkimizda->fetch(PDO::FETCH_ASSOC);
+
+
         require "inc/class.phpmailer.php"; // PHPMailer dosyamızı çağırıyoruz
         $mail = new PHPMailer();
         $mail->IsSMTP();
         $mail->setFrom($_POST['mail'],$_POST['isim']);
         $mail->Host = "smtp.gmail.com"; //SMTP server adresi
         $mail->SMTPAuth = true;
-        $mail->Username = "alibey848@gmail.com"; //SMTP kullanıcı adı
+        $mail->Username =$hakkimizda_cek['hakkimizda_mail']; //SMTP kullanıcı adı
         $mail->Password = "qqtxjrmrnlhpxrkz"; //SMTP şifre
         $mail->SMTPSecure = "tls";
         $mail->Port = "587";
@@ -1158,7 +1164,7 @@ if(isset($_POST['rezervasyon_gonder'])){
         $mail->Subject = "Rezervasyon ".$_POST['isim']."istedi.";
         $mail->Body = $_POST['mesaj'];
         $mail->AltBody = strip_tags("mesaj");
-        $mail->AddAddress("alibey848@gmail.com");
+        $mail->AddAddress($hakkimizda_cek['hakkimizda_mail']);
         return ($mail->Send()) ? true : false;
         $mail->ClearAddresses();
 

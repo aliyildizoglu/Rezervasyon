@@ -162,7 +162,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                                 <a href="#section-about">Hakkımda</a>
                             </li>
                             <li class="menu-item">
-                                <a href="#section-portfolio">Fotoğraflarım</a>
+                                <a href="#section-portfolio">Paylaşımlar</a>
                             </li>
                             <li class="menu-item">
                                 <a href="#section-contacts">İletişim</a>
@@ -491,7 +491,7 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
 
                 <!-- title -->
                 <div class="title">
-                    <div class="title_inner">Fotoğraflarım</div>
+                    <div class="title_inner">Paylaşımlar</div>
                 </div>
 
                 <!-- portfolio filter -->
@@ -522,27 +522,6 @@ $hakkimda_cek = $hakkimda->fetch(PDO::FETCH_ASSOC);
                 <!-- portfolio items -->
                 <div class="box-items portfolio-items">
 
-                    <div class="box-item f-gallery">
-                        <div class="image">
-                            <a href="#gallery-1" class="has-popup-gallery hover-animated">
-                                <img src="admin/resimler/hakkimizda_resimler/10195b8e6d967152d827603dd434.webp" class="wp-post-image" alt=""/>
-                                <span class="info circle">
-										<span class="centrize full-width">
-											<span class="vertical-center">
-												<span class="icon fas fa-images"></span>
-												<span class="desc">
-													<span class="category">Gallery</span>
-													<span class="name">Shot in Iceland</span>
-												</span>
-											</span>
-										</span>
-									</span>
-                            </a>
-                            <div id="gallery-1" class="mfp-hide">
-                                <a href="images/work1.jpg"></a>
-                            </div>
-                        </div>
-                    </div>
                     <?php
                     $link = $conn->prepare("SELECT * FROM link WHERE  link_durum= '0'");
                     $link->execute(['link_durum' => '0']);
