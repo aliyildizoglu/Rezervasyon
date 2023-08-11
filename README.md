@@ -1,2 +1,0 @@
-# Rezervasyon
- Kişisel Rezervasyon Sitesi
